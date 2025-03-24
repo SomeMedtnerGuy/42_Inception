@@ -1,0 +1,70 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    docker-compose.yml                                 :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: ndo-vale <ndo-vale@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/03/23 13:06:58 by ndo-vale          #+#    #+#              #
+#    Updated: 2025/03/24 18:29:20 by ndo-vale         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+services:
+  nginx:
+    build: requirements/nginx/.
+    container_name: nginx
+    restart: on-failure
+    depends_on:
+      - wordpress
+      - mariadb
+    env_file:
+      - .env
+    ports:
+      - "443:443"
+    volumes:
+      - /home/some-medtner-guy/data/web:/var/www/html
+    networks:
+      inception:
+  wordpress:
+    build: requirements/wordpress/.
+    container_name: wordpress
+    restart: on-failure
+    depends_on:
+      - mariadb
+    env_file:
+      - .env
+    environment:
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_HOST=mariadb
+      - WP_URL=localhost
+      - WP_TITLE=Inception
+      - ADMIN_USER=$ADMIN_USER
+      - ADMIN_PASSWORD=$ADMIN_PASSWORD
+      - ADMIN_EMAIL=$ADMIN_EMAIL
+      - GUEST_NAME=$GUEST_NAME
+      - GUEST_EMAIL=$GUEST_EMAIL
+      - GUEST_PASSWORD=$GUEST_PASSWORD
+    volumes:
+      - /home/some-medtner-guy/data/web:/var/www/html
+    networks:
+      inception:
+  mariadb:
+    build: requirements/mariadb/.
+    container_name: mariadb
+    restart: on-failure
+    env_file:
+      - .env
+    environment:
+      - DB_NAME=$DB_NAME
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+    volumes:
+      - /home/some-medtner-guy/data/database:/var/lib/mysql
+    networks:
+      inception:
+
+networks:
+  inception:
