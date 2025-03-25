@@ -8,5 +8,5 @@ chmod +x wp-cli.phar
 ./wp-cli.phar core install --url=${WP_URL} --title=${WP_TITLE} --admin_user=${ADMIN_USER} --admin_password=${ADMIN_PASSWORD} --admin_email=${ADMIN_EMAIL} --allow-root
 ./wp-cli.phar user create ${GUEST_NAME} ${GUEST_EMAIL} --user_pass=${GUEST_PASSWORD} --allow-root
 
-php-fpm7.4 -F
+exec php-fpm7.4 -F
 

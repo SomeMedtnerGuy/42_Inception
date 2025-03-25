@@ -19,5 +19,5 @@ COPY tools/installdb.sh .
 
 RUN mkdir -p /run/mysqld && chmod +x installdb.sh
 
-CMD ["./installdb.sh"]
+ENTRYPOINT ["./installdb.sh"]
 

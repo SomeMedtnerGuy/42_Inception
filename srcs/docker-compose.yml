@@ -23,7 +23,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - /home/some-medtner-guy/data/web:/var/www/html
+      - /home/ndo-vale/data/web:/var/www/html
     networks:
       inception:
   wordpress:
@@ -48,7 +48,7 @@ services:
       - GUEST_EMAIL=$GUEST_EMAIL
       - GUEST_PASSWORD=$GUEST_PASSWORD
     volumes:
-      - /home/some-medtner-guy/data/web:/var/www/html
+      - /home/ndo-vale/data/web:/var/www/html
     networks:
       inception:
   mariadb:
@@ -62,7 +62,7 @@ services:
       - DB_USER=$DB_USER
       - DB_PASSWORD=$DB_PASSWORD
     volumes:
-      - /home/some-medtner-guy/data/database:/var/lib/mysql
+      - /home/ndo-vale/data/database:/var/lib/mysql
     networks:
       inception:
 

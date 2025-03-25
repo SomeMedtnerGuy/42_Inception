@@ -11,4 +11,4 @@ EOF
 chmod +x /etc/mysql/init.sql
 
 mysql_install_db
-mysqld
+exec mysqld
